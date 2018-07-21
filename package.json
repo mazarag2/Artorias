@@ -1,0 +1,19 @@
+{
+  "name": "artorias",
+  "version": "1.0.0",
+  "description": "Node js Service for isitLikeDarkSoulsClient",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mazarag2/ArtoriasTheAbyssWalker.git"
+  },
+  "author": "Mike Zaragoza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mazarag2/ArtoriasTheAbyssWalker/issues"
+  },
+  "homepage": "https://github.com/mazarag2/ArtoriasTheAbyssWalker#readme"
+}
