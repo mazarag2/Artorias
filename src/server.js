@@ -20,31 +20,32 @@ app.listen(8081);
 app.use('/public',express.static(path.join(__dirname, '../public')));
 
 
+app.use(function(req, res) {
+  res.status(404).send({url: req.originalUrl + ' not found'})
+});
+
 app.get('/search/games', function (req, res) {
 	
 	var header = url.parse(req.url, true);
 	console.log(header);
 	
+	var gameName = header.query.game;
+	
+	console.log(gameName);
 	client.games({
-			filters: {
-				'release_dates.date-gt': '2010-12-31',
-				'release_dates.date-lt': '2012-01-01'
-			},
-			limit: 5,
+			limit: 10,
 			offset: 0,
 			order: 'release_dates.date:desc',
-			search: 'zelda'
+			search: gameName
 		}, [
 			'name',
 			'release_dates.date',
 			'rating',
-			'hypes',
 			'cover']
 	).then(response => {
 		res.send(response.body);
 	}).catch(error => {
 		console.log(error);
-		throw error;
 	});
 		
 });
