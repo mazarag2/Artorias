@@ -20,10 +20,6 @@ app.listen(8081);
 app.use('/public',express.static(path.join(__dirname, '../public')));
 
 
-app.use(function(req, res) {
-  res.status(404).send({url: req.originalUrl + ' not found'})
-});
-
 app.get('/search/games', function (req, res) {
 	
 	var header = url.parse(req.url, true);
@@ -32,20 +28,58 @@ app.get('/search/games', function (req, res) {
 	var gameName = header.query.game;
 	
 	console.log(gameName);
+	
 	client.games({
 			limit: 10,
 			offset: 0,
-			order: 'release_dates.date:desc',
-			search: gameName
+			order: 'release_dates.date:asc',
+			search: gameName,
+			genres: 5
 		}, [
-			'name',
-			'release_dates.date',
-			'rating',
-			'cover']
+			'genres']
 	).then(response => {
-		res.send(response.body);
+		//may need to wrap this in promise
+		var genreID = response.body;
+		console.log(genreID);
+		getGenreNameById(genreID).then(function(resolve){
+		
+			res.send(resolve);
+		
+		});
+		
 	}).catch(error => {
 		console.log(error);
 	});
+	//we need to extract genere and search that in the API
+
 		
 });
+
+
+function getGenreIDfromGameName(){
+	
+	
+	
+	
+	
+}
+
+
+function getGenreNameById(genreID){
+	
+	return new Promise(function(resolve,reject){
+		client.genres({
+			ids: genreID// Index offset for results
+		},['slug','url']).then(response => {
+			resolve(response.body);
+		}).catch(error => {
+			reject(error);
+		});
+	});
+	
+}
+
+app.use(function(req, res) {
+  res.status(404).send({url: req.originalUrl + ' not found'})
+});
+
