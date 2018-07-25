@@ -28,38 +28,68 @@ app.get('/search/games', function (req, res) {
 	var gameName = header.query.game;
 	
 	console.log(gameName);
+	getGenreIDfromGameName(gameName).then(function(resolve){
 	
-	client.games({
-			limit: 10,
-			offset: 0,
-			order: 'release_dates.date:asc',
-			search: gameName,
-			genres: 5
-		}, [
-			'genres']
-	).then(response => {
-		//may need to wrap this in promise
-		var genreID = response.body;
+		var genreID = resolve;
 		console.log(genreID);
 		getGenreNameById(genreID).then(function(resolve){
 		
 			res.send(resolve);
 		
 		});
-		
-	}).catch(error => {
-		console.log(error);
 	});
 	//we need to extract genere and search that in the API
-
 		
 });
 
 
-function getGenreIDfromGameName(){
+function findCommonId(list){
 	
+	var tally = [];
+	var index = 0;
+	for(var item.genres : list){
+		
+		tally[item] += 1;
+		
+	}
 	
+	var highestNum = 0;
 	
+	for(var num : tally){
+		
+		if(num > highestNum){
+			
+			highestNum = num;
+			
+		}
+		
+		
+	}
+	
+	return highestNum;
+}
+
+function getGenreIDfromGameName(gameName){
+	
+	return new Promise(function(resolve,reject){
+		client.games({
+				order: 'release_dates.date:asc',
+				search: gameName
+			}, [
+				'genres']
+		).then(response => {
+			//may need to wrap this in promise
+			console.log(response.body);
+			//an array of shit 
+			
+			var genreID = response.body.genreID;
+			console.log(genreID);
+			resolve(genreID);
+			
+		}).catch(error => {
+			console.log(error);
+		});
+	});
 	
 	
 }
