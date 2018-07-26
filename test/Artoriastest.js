@@ -1,81 +1,34 @@
-describe('Create', function() {
-  describe('#CheckUserFunctions()', function() {
-	/*    
-    it('should return an error msg for Creating an Account with Existing email', function() {
-		
-		const errorMsg = "The email address is already in use by another account.";
-		var newQuery = new query();
-		var newAuth = new auth();
-		var existingEmail = process.env.TEST_EMAIL;
-		var password1 = process.env.TEST_PASSWORD;
+var assert = require('assert');
+const Util = require("../src/Util");
+const dotev = require('dotenv').config();
+var expect = require('chai').expect;
 
-		var postData = {
-			
-			email : existingEmail,
-			password : password1,
-			password2 : password1,
-			firstname : "Mike",
-			lastname : "Z"
-			
-		}
-		const resolvingPromise = new Promise(function(resolve){
-			
-			resolve(newAuth.CreateUser(postData,firebase,userRef));
-			
-		});
-		return resolvingPromise.then(function(resolve){
-			
-			console.log("existing " + resolve);
-			assert.equal(errorMsg,resolve);
-			
-		})
-		
-    });
-	*/
+describe('Util', function() {
+  describe('#CheckUtilFunctions()', function() {
 	
-	it('should return true logging in Existing User',function(done){
+	it('should return a max number for a list',function(done){
 		
-		const result = true;
+	
 		
-		var newAuth = new auth();
+		var util = new Util();
 		
-		const resolvingPromise = new Promise(function(resolve){
-			
-			resolve(newAuth.signInUser(existingEmail,password1,firebase));
-			done();
-			
-		});
-		return resolvingPromise.then(function(resolve){
-			
+		var list = [ { id: 740, genres: [ 5 ] },
+					  { id: 45149, genres: [ 5, 31 ] },
+					  { id: 986, genres: [ 5 ] },
+					  { id: 3122, genres: [ 5 ] },
+					  { id: 43955, genres: [ 5 ] },
+					  { id: 987, genres: [ 5 ] },
+					  { id: 45147, genres: [ 5, 31 ] },
+					  { id: 988, genres: [ 11, 15 ] },
+					  { id: 43956, genres: [ 11, 15 ] },
+					  { id: 989, genres: [ 5 ] } ];
 
-			assert.equal(result,resolve);
-			
-		})
-	});
-	
-	it('should fail logging in non-existant user',function(){
 		
-		const result = "The password is invalid or the user does not have a password.";
+		var comNum = util.findCommonId(list);
 		
-		var newAuth = new auth();
-		
-		var password2 = process.env.TEST_PASSWORD2;
-		
-		const resolvingPromise = new Promise(function(resolve,reject){
-			
-			resolve(newAuth.signInUser(existingEmail,password2,firebase));
-			done();
-			
-		});
-		return resolvingPromise.catch(function(e) {
-			expect(e).to.equal(result);
-		})
-		
-	});
-	
+		expect(comNum).to.be(5);
+	});	
 	
   });
 
-  
-  
 });
