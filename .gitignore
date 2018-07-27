@@ -6,5 +6,5 @@ node_modules/
 *.ntvs*
 *.njsproj
 *.sln
-
+lib/
 .env

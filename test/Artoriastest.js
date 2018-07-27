@@ -1,11 +1,12 @@
 var assert = require('assert');
 const Util = require("../src/Util");
+const ds = require("../src/DarkSoulsStrategy");
 const dotev = require('dotenv').config();
 var expect = require('chai').expect;
 
 describe('Util', function() {
   describe('#CheckUtilFunctions()', function() {
-	
+	/*
 	it('should return a max number for a list',function(done){
 		
 	
@@ -28,6 +29,19 @@ describe('Util', function() {
 		
 		expect(comNum).to.be(5);
 	});	
+	*/
+	
+	describe('#CheckDarkSoulsStrategy()', function(){
+		
+		var strategy = new ds();
+		
+		
+		
+		
+		
+	});
+	
+	
 	
   });
 
