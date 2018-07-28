@@ -6,7 +6,8 @@
   "scripts": {
     "build": "./node_modules/.bin/babel src -d lib",
     "test": "mocha test/Artoriastest.js",
-    "run": "node src/server.js"
+    "start": "node src/server.js",
+	"clean" : "rmdir lib/"
   },
   "repository": {
     "type": "git",
