@@ -20,23 +20,20 @@ var DarkSoulsStrategy = function(){
 			}
 				
 		*/
-	
-			//var ids = [];
+
 		for(var x = 0; x <= param.length - 1; x++){
 			
 			var id = param[x].id;
 			console.log(id);
 			if(id == 12 || id == 25 || id == 31){
 
-				return "yea dude since "  + gameName + "is an RPG with Hack and Slash Elements and exploration its basically Dark Souls";
+				return "yea dude since "  + gameName + " is an RPG with Hack and Slash Elements and exploration its basically Dark Souls";
 				
 			}
 			
 		}
 		
-		return "yea its nothing like Dark Souls";
-
-
+		return "nah its nothing like Dark Souls";
 
 	}
 }
