@@ -2,21 +2,22 @@ var util = function() {
 
 	this.findCommonId = function(list){
 		
-		var tally = [];
+		var tally = {};
 		var index = 0;
 		for(var x = 0; x <= list.length - 1; x++){
 			
 			var nestedList = list[x].genres;
 			console.log(nestedList);
-			for(var y = 0 ; y <= list[x].genres.length -1 ; y++){
+			for(var y = 0 ; y <= list[x].genres.length - 1 ; y++){
 				
 				
-				if(typeof tally[nestedList[y]]){
-					
-					tally[nestedList[y]] = 0;
+				if(!tally[nestedList[y]]){
+					tally[nestedList[y]] = 1;
 				}
-
+				else{
+					
 					tally[nestedList[y]] += 1;
+				}
 			
 				
 			}
@@ -29,18 +30,19 @@ var util = function() {
 		
 		
 		//sort asc 
-		tally.forEach(function(currentNum){
-			
-			if(currentNum > highestNum){
+		for (var key in tally) {
+			if (tally.hasOwnProperty(key)) {
 				
-				highestNum = currentNum;
+				if(tally[key] > highestNum){
 				
+					highestNum = key;
+				
+				}
 			}
+		}
 			
-			
-		});
 		console.log(highestNum);
-		return highestNum;
+		return Number(highestNum);
 		
 	}
 	

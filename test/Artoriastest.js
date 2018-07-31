@@ -4,7 +4,8 @@ const ds = require("../src/DarkSoulsStrategy");
 const dotev = require('dotenv').config();
 var expect = require('chai').expect;
 var strategy = null;
-describe('Util', function() {
+var util = null;
+describe('TestFunctions', function() {
 	
 	describe('#CheckDarkSoulsStrategy()', function(){
 		
@@ -42,6 +43,41 @@ describe('Util', function() {
 		
 		
 	});
+	
+	describe('#CheckDarkSoulsStrategy()', function(){
+		
+		before(function(){
+			// runs before all tests in this block(need to log in a test user to authenticate Fb Calls)
+			util = new Util();
+			
+		});
+		it('should return 5 as the max number',function(){
+			
+			//var strategy = new ds();
+		
+			var params = [ { id: 740, genres: [ 5 ] },
+						  { id: 45149, genres: [ 5, 31 ] },
+						  { id: 986, genres: [ 5 ] },
+						  { id: 3122, genres: [ 5 ] },
+						  { id: 43955, genres: [ 5 ] },
+						  { id: 987, genres: [ 5 ] },
+						  { id: 45147, genres: [ 5, 31 ] },
+						  { id: 988, genres: [ 11, 15 ] },
+						  { id: 43956, genres: [ 11, 15 ] },
+						  { id: 989, genres: [ 5 ] } ]
+
+			
+			var gameName = "Halo 3";
+			
+			var result = util.findCommonId(params,gameName);
+			console.log(result);
+			
+			expect(result).to.equal(5);
+		});
+		
+		
+	});
+	
 	
 	
 
