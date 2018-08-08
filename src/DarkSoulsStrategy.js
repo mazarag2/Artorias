@@ -1,5 +1,23 @@
 var DarkSoulsStrategy = function(){
 
+	this.isItLikeDarkSoulsId = function(genres,gameName){
+		
+	
+		for(var x = 0; x <= genres.length - 1; x++){
+			
+			
+			if(genres[x] == 12 || genres[x] == 25 || genres[x] == 31){
+
+				return "yea dude since "  + gameName + " is an RPG with Hack and Slash Elements and exploration its basically Dark Souls";
+				
+			}
+			
+			
+		}
+		return "nah its nothing like Dark Souls";
+	
+		
+	},
 	this.isitLikeDarkSouls = function(param,gameName){
 	
 		/*

@@ -8,3 +8,7 @@ node_modules/
 *.sln
 lib/
 .env
+.coveralls.yml
+.nyc_output/
+coverage/
+test/coverage/

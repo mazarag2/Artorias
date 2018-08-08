@@ -6,16 +6,18 @@ require("dotenv").config();
 const client = igdb(process.env.API_KEY);
 var app = express();
 var router = express.Router();
+var cors = require('cors');
 //For Debug Purposes
 console.log("YOUR API KEY : " + process.env.API_KEY);
 console.log(path.join(__dirname, '../public'));
 
 app.listen(8081);
-//app.use('/public', express.static(path.join(__dirname, '../public')));
 app.use('/', router);
 
+//Enable Preflight response for CORS
+router.options('/games/:gamename', cors());
 
-router.get('/games/:gamename', function (req, res) {
+router.get('/games/:gamename',cors() ,function (req, res) {
 
 
 	var gameName = req.params.gamename;
@@ -25,51 +27,23 @@ router.get('/games/:gamename', function (req, res) {
 		limit: 1,
 		search: gameName
 	}, ['genres', 'name', 'slug']).then(response => {
-
-
+		console.log(response.body);
 		var genreID = response.body[0].genres;
-		getGenreNameById(genreID).then(function (resolve) {
-
-			//res.send(resolve);
-			var dsStrategy = new darksoulstrategy();
-			console.log(resolve);
-			var msg = dsStrategy.isitLikeDarkSouls(resolve,gameName);
-			console.log(msg);
-			res.send(msg);
-			
-		}).catch(error => {
-			console.log(error);
-			res.status(400).send({ url: req.originalUrl + ' Unable to find ' + gameName + ' Please try another game' });
-		});
+		console.log(typeof genreID);
+		console.log("genre " + genreID);
+		
+		var dsStrategy = new darksoulstrategy();
+		console.log(response);
+		var msg = dsStrategy.isItLikeDarkSoulsId(genreID,gameName);
+		console.log(msg);
+		res.send(msg);
 	}).catch(error => {
 		console.log(error);
 		res.status(400).send({ url: req.originalUrl + ' Unable to find ' + gameName + ' Please try another game' });
 	});
-	/*
- 
- 
- */
+
 });
 
-function getGenreIDfromGameName(gameName) {
-
-	return new Promise(function (resolve, reject) {
-		client.games({
-			order: 'release_dates.date:asc',
-			eq: gameName
-		}, ['genres']).then(response => {
-			//may need to wrap this in promise
-			console.log(response.body);
-			//an array of shit 
-
-			var genreID = response.body.genreID;
-			console.log(genreID);
-			resolve(genreID);
-		}).catch(error => {
-			throw error;
-		});
-	});
-}
 
 function getGenreNameById(genreID) {
 

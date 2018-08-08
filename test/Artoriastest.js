@@ -41,6 +41,33 @@ describe('TestFunctions', function() {
 			
 		});
 		
+		it('should return a negative message when its not DarkSouls just using ID',function(){
+			
+	
+		
+			var params = [6];
+			
+			var gameName = "Tekken";
+			
+			var result = strategy.isItLikeDarkSoulsId(params,gameName);
+			
+			expect(result).to.equal("nah its nothing like Dark Souls");
+		});
+		it('should return a positive message when its Dark Soulswith just using ID',function(){
+			
+			
+			var params = [12];
+			
+			var gameName = "Skyrim";
+			
+			var result = strategy.isItLikeDarkSoulsId(params,gameName);
+			
+			expect(result).to.equal("yea dude since "  + gameName + " is an RPG with Hack and Slash Elements and exploration its basically Dark Souls");
+	
+			
+		});
+		
+		
 		
 	});
 	
@@ -74,6 +101,8 @@ describe('TestFunctions', function() {
 			
 			expect(result).to.equal(5);
 		});
+		
+		
 		
 		
 	});
