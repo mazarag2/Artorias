@@ -17,6 +17,15 @@ app.use('/', router);
 //Enable Preflight response for CORS
 router.options('/games/:gamename', cors());
 
+
+router.get('/',function(req,res){
+	
+	
+	res.send("Available Methods are :  /games/<insert_game_name>");
+	
+	
+});
+
 router.get('/games/:gamename',cors() ,function (req, res) {
 
 
