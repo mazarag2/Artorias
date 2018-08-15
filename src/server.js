@@ -10,8 +10,12 @@ var cors = require('cors');
 //For Debug Purposes
 console.log("YOUR API KEY : " + process.env.API_KEY);
 console.log(path.join(__dirname, '../public'));
+const serverPort = 8080;
+var port = process.env.PORT || serverPort;
 
-app.listen(8081);
+console.log("Port : " + port);
+
+app.listen(port);
 app.use('/', router);
 
 //Enable Preflight response for CORS
