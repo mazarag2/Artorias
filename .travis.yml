@@ -16,7 +16,7 @@ install :
   - npm install
 script:
   - node src/server.js & sleep 4 &
-  - nyc mocha test/Artoriastest.js --lines 85 --functions 85 --branches 85
+  - nyc mocha test/Artoriastest.js --lines 85 --functions 85 --branches 85 && nyc report --reporter=text-lcov | coveralls
 after_success:
   - process.exit()
   - echo Build Succeded
